@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Resume</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'MiSans-Regular';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'MiSans-Bold';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Bold.ttf');
+        }
+        @font-face {
+            font-family: 'Alibaba-PuHuiTi-Bold';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/Alibaba-PuHuiTi-Bold.otf');
+        }
+
+        :root {
+            --primary: #2563EB;
+            --secondary: #3B82F6;
+            --accent: #60A5FA;
+            --dark: #0F172A;
+            --gray: #64748B;
+            --light-bg: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --gradient-bg: linear-gradient(135deg, #EFF6FF 0%, #F8FAFC 100%);
+            --header-h: 80px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100%;
+            min-height: 100vh;
+            background-color: var(--light-bg);
+            font-family: 'MiSans-Regular', sans-serif;
+            color: var(--dark);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Header */
+        header {
+            width: 100%;
+            height: var(--header-h);
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 80px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-family: 'Alibaba-PuHuiTi-Bold', sans-serif;
+            font-size: 24px;
+            letter-spacing: 1px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            color: var(--primary);
+            font-size: 28px;
+        }
+
+        nav {
+            display: flex;
+            gap: 40px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-size: 16px;
+            font-weight: 600;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a.active {
+            color: var(--primary);
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -29px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px 3px 0 0;
+        }
+
+        /* Main Layout */
+        .container {
+            margin-top: var(--header-h);
+            padding: 60px 80px;
+            display: grid;
+            grid-template-columns: 420px 1fr;
+            gap: 40px;
+            max-width: 1600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Left Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .profile-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.03);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120px;
+            background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+            z-index: 0;
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: #fff;
+            margin: 0 auto 20px;
+            position: relative;
+            z-index: 1;
+            border: 4px solid #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: var(--primary);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            background-image: url('照片.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .profile-name {
+            font-family: 'MiSans-Bold';
+            font-size: 28px;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-title {
+            color: var(--gray);
+            font-size: 16px;
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-list {
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            position: relative;
+            z-index: 1;
+            padding-top: 24px;
+            border-top: 1px solid #eee;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--dark);
+            font-size: 15px;
+        }
+
+        .contact-item i {
+            color: var(--primary);
+            font-size: 18px;
+            background: rgba(37, 99, 235, 0.1);
+            padding: 8px;
+            border-radius: 8px;
+        }
+
+        .section-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .sidebar-title {
+            font-family: 'MiSans-Bold';
+            font-size: 20px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .sidebar-title i {
+            color: var(--primary);
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            background: #F1F5F9;
+            color: var(--dark);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .edu-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .edu-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .edu-school {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .edu-degree {
+            color: var(--dark);
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .edu-year {
+            color: var(--gray);
+            font-size: 13px;
+        }
+
+        /* Right Content */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .content-header {
+            margin-bottom: 10px;
+        }
+
+        .big-title {
+            font-family: 'Alibaba-PuHuiTi-Bold';
+            font-size: 42px;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #1E293B 0%, #334155 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .intro-text {
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--gray);
+            max-width: 800px;
+        }
+
+        .exp-section {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .section-header h2 {
+            font-family: 'MiSans-Bold';
+            font-size: 28px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-header h2::before {
+            content: '';
+            display: block;
+            width: 6px;
+            height: 28px;
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        .exp-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 32px;
+            position: relative;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(0,0,0,0.03);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 30px;
+            cursor: pointer;
+        }
+        
+        .exp-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.01);
+            border-color: rgba(37, 99, 235, 0.2);
+        }
+
+        .exp-left {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .company-logo {
+            width: auto;
+            height: auto;
+            background: none;
+            border-radius: 0;
+            display: block;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .exp-period {
+            font-size: 14px;
+            color: var(--gray);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .exp-location {
+            font-size: 13px;
+            color: #94A3B8;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .exp-right {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .job-title {
+            font-size: 20px;
+            font-family: 'MiSans-Bold';
+            color: var(--dark);
+        }
+
+        .company-name {
+            font-size: 16px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .job-desc {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--gray);
+        }
+
+        .job-achievements {
+            margin-top: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .achievement-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 14px;
+            color: #475569;
+        }
+
+        .achievement-item i {
+            color: var(--accent);
+            margin-top: 3px;
+        }
+
+        /* Decorative Elements */
+        .bg-shape-1 {
+            position: fixed;
+            top: 100px;
+            right: -100px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, rgba(255, 255, 255, 0) 70%);
+            border-radius: 50%;
+            z-index: -1;
+        }
+        
+        .bg-shape-2 {
+            position: fixed;
+            bottom: -100px;
+            left: -100px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.05) 0%, rgba(255, 255, 255, 0) 70%);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        /* 响应式布局 - 当浏览器变窄时隐藏logo和英文 */
+        @media (max-width: 900px) {
+            .logo-text {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .nav-en {
+                display: none;
+            }
+            
+            nav {
+                gap: 20px;
+            }
+            
+            header {
+                padding: 0 20px;
+            }
+            
+            .container {
+                padding: 0 20px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="bg-shape-1"></div>
+    <div class="bg-shape-2"></div>
+
+    <header>
+        <div class="logo">
+            <i class="ri-palette-fill"></i>
+            <span class="logo-text">Golconda·Studio</span>
+        </div>
+        <nav>
+            <a href="个人简历.html" class="active">简历 <span class="nav-en">Resume</span></a>
+            <a href="短视频作品集.html">作品集 <span class="nav-en">Portfolio</span></a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <!-- Profile Card -->
+            <div class="profile-card">
+                <div class="avatar">
+                </div>
+                <h1 class="profile-name">余鸿</h1>
+                <p class="profile-title">编导/编剧/导演/剪辑</p>
+                
+                <div class="contact-list">
+                    <div class="contact-item">
+                        <i class="ri-mail-send-line"></i>
+                        <span>304338607@qq.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="ri-phone-line"></i>
+                        <span>+86 18551461421</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="ri-map-pin-line"></i>
+                        <span>Hangzhou，China</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="ri-book-line"></i>
+                        <span>3年工作经验</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Education -->
+            <div class="section-card">
+                <div class="sidebar-title">
+                    <i class="ri-graduation-cap-line"></i>
+                    <span>教育背景 Education</span>
+                </div>
+                <div class="edu-item">
+                    <div class="edu-school">福建师范大学</div>
+                    <div class="edu-degree">广播电视编导 · 学士</div>
+                    <div class="edu-year">2018-2022</div>
+                    <div style="margin-top: 8px; font-size: 13px; color: var(--gray);">
+                        教育部第五轮学科评估：获评B - 档，专业排名第8
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skills -->
+            <div class="section-card">
+                <div class="sidebar-title">
+                    <i class="ri-tools-line"></i>
+                    <span>专业技能 Skills</span>
+                </div>
+                <div class="skill-tags">
+                    <span class="tag">脚本撰写</span>
+                    <span class="tag">分镜设计</span>
+                    <span class="tag">现场执导</span>
+                    <span class="tag">视听设计</span>
+                    <span class="tag">制片统筹</span>
+                    <span class="tag">Premiere</span>
+                    <span class="tag">After Effects</span>
+                    <span class="tag">Final Cut Pro</span>
+                    <span class="tag">达芬奇</span>
+                    <span class="tag">Photoshop</span>
+                    <span class="tag">AI运用</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            
+            <div class="content-header">
+                <h2 class="big-title">关于我 About Me</h2>
+                <p class="intro-text">
+                    拥有5年以上的数字产品设计经验，专注于创造直观且富有吸引力的用户体验。擅长将复杂的业务需求转化为简洁的设计解决方案。对设计趋势保持敏锐洞察，热衷于探索前沿的交互方式与视觉表现。致力于通过设计提升产品价值，并在团队中推动设计系统的建立与优化。
+                </p>
+            </div>
+
+            <div class="exp-section">
+                <div class="section-header">
+                    <h2>工作经历 Work Experience</h2>
+                </div>
+
+                <!-- Job 1 -->
+                <div class="exp-card">
+                    <div class="exp-left">
+                        <div class="company-logo">
+                            杭州有甜文化传媒有限公司
+                        </div>
+                        <div class="exp-period">
+                            <i class="ri-calendar-line"></i>
+                            2021.06 - Present
+                        </div>
+                        <div class="exp-location">
+                            <i class="ri-map-pin-2-line"></i>
+                            Shanghai
+                        </div>
+                    </div>
+                    <div class="exp-right">
+                        <div class="job-title">高级UI设计师 Senior UI Designer</div>
+                        <div class="company-name">TechFlow Solutions Inc.</div>
+                        <p class="job-desc">
+                            负责公司核心SaaS产品的界面设计与用户体验优化。主导设计系统的重构，提升团队设计效率30%。与产品经理和开发团队紧密合作，确保设计方案的高质量落地。
+                        </p>
+                        <div class="job-achievements">
+                            <div class="achievement-item">
+                                <i class="ri-checkbox-circle-fill"></i>
+                                <span>主导企业级后台管理系统的改版设计，用户满意度提升25%。</span>
+                            </div>
+                            <div class="achievement-item">
+                                <i class="ri-checkbox-circle-fill"></i>
+                                <span>建立并维护名为"FlowUI"的组件库，覆盖Web端与移动端。</span>
+                            </div>
+                            <div class="achievement-item">
+                                <i class="ri-checkbox-circle-fill"></i>
+                                <span>指导2名初级设计师，定期组织设计分享会。</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Job 2 -->
+                <div class="exp-card">
+                    <div class="exp-left">
+                        <div class="company-logo">
+                            福州仓山区七零八壹文化传媒有限公司
+                        </div>
+                        <div class="exp-period">
+                            <i class="ri-calendar-line"></i>
+                            2019.08 - 2021.05
+                        </div>
+                        <div class="exp-location">
+                            <i class="ri-map-pin-2-line"></i>
+                            Hangzhou
+                        </div>
+                    </div>
+                    <div class="exp-right">
+                        <div class="job-title">视觉设计师 Visual Designer</div>
+                        <div class="company-name">CloudMusic Interactive</div>
+                        <p class="job-desc">
+                            参与音乐流媒体应用的运营活动设计与品牌视觉延展。负责线上营销H5的视觉创意与动效设计，创造沉浸式的用户互动体验。
+                        </p>
+                        <div class="job-achievements">
+                            <div class="achievement-item">
+                                <i class="ri-checkbox-circle-fill"></i>
+                                <span>负责年度音乐盛典的主视觉设计，全网曝光量超千万。</span>
+                            </div>
+                            <div class="achievement-item">
+                                <i class="ri-checkbox-circle-fill"></i>
+                                <span>优化APP内会员中心界面，转化率提升15%。</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Job 3 -->
+                <div class="exp-card">
+                    <div class="exp-left">
+                        <div class="company-logo">
+                            福州电视台融媒体中心
+                        </div>
+                        <div class="exp-period">
+                            <i class="ri-calendar-line"></i>
+                            2018.07 - 2019.07
+                        </div>
+                        <div class="exp-location">
+                            <i class="ri-map-pin-2-line"></i>
+                            Shanghai
+                        </div>
+                    </div>
+                    <div class="exp-right">
+                        <div class="job-title">UI 设计助理 Junior UI Designer</div>
+                        <div class="company-name">Bili Creative Studio</div>
+                        <p class="job-desc">
+                            协助高级设计师完成日常界面更新与图标绘制。参与用户调研，收集反馈并转化为设计改进点。
+                        </p>
+                        <div class="job-achievements">
+                            <div class="achievement-item">
+                                <i class="ri-checkbox-circle-fill"></i>
+                                <span>绘制超过200个矢量的线性图标，统一产品视觉语言。</span>
+                            </div>
+                            <div class="achievement-item">
+                                <i class="ri-checkbox-circle-fill"></i>
+                                <span>协助完成小程序从0到1的界面搭建。</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var expCards = document.querySelectorAll('.exp-card');
+            expCards.forEach(function(card, index) {
+                card.addEventListener('click', function() {
+                    if (index === 0) {
+                        window.location.href = '工作经历-杭州有甜.html';
+                    } else if (index === 1) {
+                        window.location.href = '工作经历-七零八壹.html';
+                    } else if (index === 2) {
+                        window.location.href = '工作经历-福州电视台.html';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
